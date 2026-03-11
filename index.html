@@ -1,1 +1,166 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rana'ya Özel... 💌</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 20px;
+            animation: move linear infinite;
+            top: 100%;
+            z-index: 0;
+        }
+
+        @keyframes move {
+            to { transform: translateY(-110vh) rotate(360deg); }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(214, 51, 132, 0.3);
+            max-width: 550px;
+            z-index: 10;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            margin: 20px;
+        }
+
+        h1 { 
+            color: #d63384; 
+            font-size: 19px; 
+            line-height: 1.6; 
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .final-text {
+            display: block;
+            margin-top: 15px;
+            color: #ff4d6d;
+            font-weight: bold;
+            font-size: 22px;
+            line-height: 1.5;
+        }
+
+        .buttons { 
+            margin-top: 30px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 20px; 
+        }
+
+        button {
+            padding: 15px 35px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        #yesBtn { background-color: #ff4d6d; color: white; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4); }
+        #noBtn { background-color: #adb5bd; color: white; }
+        
+        .insta-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #f09433, #bc1888);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 20;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainContainer">
+        <h1 id="question">
+            Rana, seni gördüğümde heyecanlanıyorum. Kimseye belli etmesem de birini seviyorum ve o sensin. Benimle çıkmak ister misin? 💗
+        </h1>
+        
+        <div class="buttons" id="btnGroup">
+            <button id="yesBtn" onclick="evet()">Evet</button>
+            <button id="noBtn" onclick="hayir()">Hayır</button>
+        </div>
+    </div>
+
+    <a href="https://www.instagram.com/ademmert.sancar/" target="_blank" class="insta-btn">
+        📸 ademmert.sancar
+    </a>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createHeart, 300);
+
+        let clickCount = 0;
+        const messages = ["Emin misin?", "Son kararın mı?", "Bak bir daha düşün...", "Üzülürüm...", "Gerçekten mi? 💔", "Kaçış yok Rana! 😉"];
+
+        function hayir() {
+            const noBtn = document.getElementById('noBtn');
+            const yesBtn = document.getElementById('yesBtn');
+            if (clickCount < messages.length) {
+                noBtn.innerHTML = messages[clickCount];
+                let currentSize = parseInt(window.getComputedStyle(yesBtn).fontSize);
+                yesBtn.style.fontSize = (currentSize + 15) + "px";
+                clickCount++;
+            } else {
+                noBtn.style.display = 'none';
+            }
+        }
+
+        function evet() {
+            document.getElementById('mainContainer').innerHTML = `
+                <h1 style="color: #ff4d6d; font-size: 30px; margin-bottom: 10px;">Yaşasın! ❤️</h1>
+                <span class="final-text">
+                    Rana 💕<br>
+                    Seni seviyorum 🌸<br>
+                    Gülümsemen yeter ✨<br><br>
+                    İnstagram'dan bana yazar mısın? ✨
+                </span>
+                <a href="https://www.instagram.com/ademmert.sancar/" target="_blank" 
+                   style="display: inline-block; margin-top: 25px; color: white; background: #ff4d6d; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 18px; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);">
+                   TIKLA VE YAZ 🚀
+                </a>
+            `;
+            // Evet deyince kalpler coşsun!
+            setInterval(createHeart, 50);
+        }
+    </script>
+</body>
+</html>
 
